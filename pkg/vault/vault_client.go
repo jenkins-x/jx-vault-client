@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"fmt"
 	"net/url"
-	"regexp"
 
 	"github.com/jenkins-x/jx-logging/pkg/log"
 
@@ -18,7 +17,7 @@ const (
 	defaultSecretEngineMountPoint = "secret"
 )
 
-var vaultURIRegex = regexp.MustCompile(`:[\s"]*vault:[-_.\w\/:]*`)
+//var vaultURIRegex = regexp.MustCompile(`:[\s"]*vault:[-_.\w\/:]*`)
 
 // Client is an interface for interacting with Vault
 //go:generate pegomock generate github.com/jenkins-x/jx-vault-client/pkg/vault Client -o mocks/vault_client.go
@@ -200,6 +199,7 @@ func (v *client) Config() (vaultURL url.URL, vaultToken string, err error) {
 	return *parsed, v.client.Token(), err
 }
 
+// TODO we need a solution to this
 // ReplaceURIs will replace any vault: URIs in a string (or whatever URL scheme the secret URL client supports
 // func (v *client) ReplaceURIs(s string) (string, error) {
 //	return secreturl.ReplaceURIs(s, v, vaultURIRegex, "vault:")

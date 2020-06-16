@@ -22,8 +22,10 @@ func TestToGenericMapAndBack(t *testing.T) {
 	}
 
 	marshalled, err := util.ToMapStringInterfaceFromStruct(s)
+	assert.NoError(t, err)
+
 	unmarshalled := TestStruct{}
-	util.ToStructFromMapStringInterface(marshalled, &unmarshalled)
+	err = util.ToStructFromMapStringInterface(marshalled, &unmarshalled)
 
 	assert.NoError(t, err)
 	assert.Equal(t, s, unmarshalled)
